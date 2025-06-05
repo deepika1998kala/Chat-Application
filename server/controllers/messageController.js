@@ -115,7 +115,7 @@ export const sendMessage = async (req, res) => {
     // If a file is present (any type)
     if (file) {
       // Upload to Cloudinary or another storage (optional)
-      const uploadedFile = await cloudinary.uploader.upload(file.data, {
+      const uploadedFile = await cloudinary.uploader.upload(file.url, {
         resource_type: "auto", // handles any file type
       });
 
