@@ -38,7 +38,11 @@ const LoginPage = () => {
   return (
     <div className='min-h-screen bg-cover bg-center flex items-center justify-center gap-8 *:sm:justify-evenly max-sm:flex-col backdrop-blur-2xl'>
       {/* -------------------left------------------ */}
-      <img src={img.logo_big} alt="" className='w-[min(80vw, 80px)]' />
+      <div className="flex flex-col items-center space-y-4">
+        <img src={img.logo_big} alt="" className="w-[min(280vw,280px)]" />
+        <p className="text-white text-6xl">ChatBox</p>
+      </div>
+
 
       {/* --------------------right--------------------- */}
       <form onSubmit={onSubmitHandler} className='border-2 bg-white/8 text-white border-gray-500
