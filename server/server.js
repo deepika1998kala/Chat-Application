@@ -14,18 +14,18 @@ const app = express();
 const server = http.createServer(app);
 
 
+///Store online users
+export const userSocketMap = {};  //{userId: socketId}
 //Initializa socket.io server
 
 export const io = new Server(server, {
     cors: {
-        origin: "http://localhost:5173",
+        origin: "https://chat-box-ecru.vercel.app/",
         credentials: true
     }
 
 })
 
-///Store online users
-export const userSocketMap = {};  //{userId: socketId}
 
 //Socket.io connection handler
 io.on("connection", (socket)=>{
