@@ -46,12 +46,13 @@ export const AuthProvider = ({ children }) => {
     // });
     socketRef.current = io(backendUrl, {
       transports: ['websocket'],
+      query: { userId: userData._id }, // ✅ This matches your backend
     });
 
     socketRef.current.on("connect", () => {
-      console.log("Socket connected:", socketRef.current.id);
-      socketRef.current.emit("add-user", userData._id); // ✅ Moved here
+      console.log("✅ Socket connected:", socketRef.current.id);
     });
+
 
     socketRef.current.on("getOnlineUsers", (userIds) => {
       setOnlineUsers(userIds);
