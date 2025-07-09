@@ -13,9 +13,10 @@ import { Server } from "socket.io";
 const app = express();
 const server = http.createServer(app);
 
+///Store online users
+export const userSocketMap = {};  //{userId: socketId}
 
 //Initializa socket.io server
-
 export const io = new Server(server, {
     cors: {
         origin: "http://localhost:5173",
@@ -24,8 +25,6 @@ export const io = new Server(server, {
 
 })
 
-///Store online users
-export const userSocketMap = {};  //{userId: socketId}
 
 //Socket.io connection handler
 io.on("connection", (socket)=>{
@@ -62,10 +61,14 @@ await connectDB();
 
 // const PORT = process.env.PORT || 5000;
 
+// const PORT = process.env.PORT || 5000;
+// server.listen(PORT, () => console.log("Server is running on PORT: " + PORT));
 if(process.env.NODE_ENV !== "production"){
     const PORT = process.env.PORT || 5000;
     server.listen(PORT, () => console.log("Server is running on PORT: " + PORT));
 }
 
-//Export the server for vercel
+// //Export the server for vercel
 export default server;
+
+// export { io, userSocketMap };

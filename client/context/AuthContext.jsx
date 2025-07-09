@@ -33,17 +33,30 @@ export const AuthProvider = ({ children }) => {
     if (!userData) return;
     if (socketRef.current && socketRef.current.connected) return;
 
+    // socketRef.current = io(backendUrl, {
+    //   query: { userId: userData._id }
+    // });
+
+    // socketRef.current.on("connect", () => {
+    //   console.log("Socket connected:", socketRef.current.id);
+    // });
+
+    // socketRef.current.on("getOnlineUsers", (userIds) => {
+    //   setOnlineUsers(userIds);
+    // });
     socketRef.current = io(backendUrl, {
-      query: { userId: userData._id }
+      transports: ['websocket'],
     });
 
     socketRef.current.on("connect", () => {
       console.log("Socket connected:", socketRef.current.id);
+      socketRef.current.emit("add-user", userData._id); // ✅ Moved here
     });
 
     socketRef.current.on("getOnlineUsers", (userIds) => {
       setOnlineUsers(userIds);
     });
+
   };
 
   const login = async (state, credentials) => {
